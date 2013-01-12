@@ -2,14 +2,6 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: albumInstance, field: 'title', 'error')} required">
-	<label for="title">
-		<g:message code="album.title.label" default="Title" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="title" required="" value="${albumInstance?.title}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: albumInstance, field: 'songs', 'error')} ">
 	<label for="songs">
 		<g:message code="album.songs.label" default="Songs" />
@@ -25,5 +17,13 @@
 </li>
 </ul>
 
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: albumInstance, field: 'title', 'error')} ">
+	<label for="title">
+		<g:message code="album.title.label" default="Title" />
+		
+	</label>
+	<g:textField name="title" value="${albumInstance?.title}"/>
 </div>
 

@@ -9,7 +9,6 @@ import grails.test.mixin.*
 @Mock(Album)
 class AlbumControllerTests {
 
-
     def populateValidParams(params) {
       assert params != null
       // TODO: Populate valid properties like...
@@ -32,9 +31,9 @@ class AlbumControllerTests {
     }
 
     void testCreate() {
-       def model = controller.create()
+        def model = controller.create()
 
-       assert model.albumInstance != null
+        assert model.albumInstance != null
     }
 
     void testSave() {
@@ -59,7 +58,6 @@ class AlbumControllerTests {
         assert flash.message != null
         assert response.redirectedUrl == '/album/list'
 
-
         populateValidParams(params)
         def album = new Album(params)
 
@@ -77,7 +75,6 @@ class AlbumControllerTests {
 
         assert flash.message != null
         assert response.redirectedUrl == '/album/list'
-
 
         populateValidParams(params)
         def album = new Album(params)
@@ -99,7 +96,6 @@ class AlbumControllerTests {
 
         response.reset()
 
-
         populateValidParams(params)
         def album = new Album(params)
 
@@ -108,7 +104,6 @@ class AlbumControllerTests {
         // test invalid parameters in update
         params.id = album.id
         //TODO: add invalid values to params object
-        params['title'] = ' '
 
         controller.update()
 

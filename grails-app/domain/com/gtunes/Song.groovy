@@ -1,6 +1,8 @@
 package com.gtunes
 
-class Song {
+class Song
+{
+
     String title
     String artist
     Album album

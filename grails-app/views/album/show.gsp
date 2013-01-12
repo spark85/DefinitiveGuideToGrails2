@@ -1,6 +1,6 @@
 
 <%@ page import="com.gtunes.Album" %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">
@@ -23,15 +23,6 @@
 			</g:if>
 			<ol class="property-list album">
 			
-				<g:if test="${albumInstance?.title}">
-				<li class="fieldcontain">
-					<span id="title-label" class="property-label"><g:message code="album.title.label" default="Title" /></span>
-					
-						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${albumInstance}" field="title"/></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${albumInstance?.songs}">
 				<li class="fieldcontain">
 					<span id="songs-label" class="property-label"><g:message code="album.songs.label" default="Songs" /></span>
@@ -39,6 +30,15 @@
 						<g:each in="${albumInstance.songs}" var="s">
 						<span class="property-value" aria-labelledby="songs-label"><g:link controller="song" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
 						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${albumInstance?.title}">
+				<li class="fieldcontain">
+					<span id="title-label" class="property-label"><g:message code="album.title.label" default="Title" /></span>
+					
+						<span class="property-value" aria-labelledby="title-label"><g:fieldValue bean="${albumInstance}" field="title"/></span>
 					
 				</li>
 				</g:if>

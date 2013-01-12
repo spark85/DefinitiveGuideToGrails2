@@ -10,8 +10,8 @@ class AlbumController {
         redirect(action: "list", params: params)
     }
 
-    def list() {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+    def list(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
         [albumInstanceList: Album.list(params), albumInstanceTotal: Album.count()]
     }
 
@@ -26,14 +26,14 @@ class AlbumController {
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'album.label', default: 'Album'), albumInstance.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'album.label', default: 'Album'), albumInstance.id])
         redirect(action: "show", id: albumInstance.id)
     }
 
-    def show() {
-        def albumInstance = Album.get(params.id)
+    def show(Long id) {
+        def albumInstance = Album.get(id)
         if (!albumInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'album.label', default: 'Album'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'album.label', default: 'Album'), id])
             redirect(action: "list")
             return
         }
@@ -41,10 +41,10 @@ class AlbumController {
         [albumInstance: albumInstance]
     }
 
-    def edit() {
-        def albumInstance = Album.get(params.id)
+    def edit(Long id) {
+        def albumInstance = Album.get(id)
         if (!albumInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'album.label', default: 'Album'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'album.label', default: 'Album'), id])
             redirect(action: "list")
             return
         }
@@ -52,16 +52,15 @@ class AlbumController {
         [albumInstance: albumInstance]
     }
 
-    def update() {
-        def albumInstance = Album.get(params.id)
+    def update(Long id, Long version) {
+        def albumInstance = Album.get(id)
         if (!albumInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'album.label', default: 'Album'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'album.label', default: 'Album'), id])
             redirect(action: "list")
             return
         }
 
-        if (params.version) {
-            def version = params.version.toLong()
+        if (version != null) {
             if (albumInstance.version > version) {
                 albumInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'album.label', default: 'Album')] as Object[],
@@ -78,26 +77,26 @@ class AlbumController {
             return
         }
 
-		flash.message = message(code: 'default.updated.message', args: [message(code: 'album.label', default: 'Album'), albumInstance.id])
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'album.label', default: 'Album'), albumInstance.id])
         redirect(action: "show", id: albumInstance.id)
     }
 
-    def delete() {
-        def albumInstance = Album.get(params.id)
+    def delete(Long id) {
+        def albumInstance = Album.get(id)
         if (!albumInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'album.label', default: 'Album'), params.id])
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'album.label', default: 'Album'), id])
             redirect(action: "list")
             return
         }
 
         try {
             albumInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'album.label', default: 'Album'), params.id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'album.label', default: 'Album'), id])
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'album.label', default: 'Album'), params.id])
-            redirect(action: "show", id: params.id)
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'album.label', default: 'Album'), id])
+            redirect(action: "show", id: id)
         }
     }
 }

@@ -1,6 +1,6 @@
 
 <%@ page import="com.gtunes.Album" %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="main">

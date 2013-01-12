@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/DefinitiveGuideToGrails2.iml" filepath="$PROJECT_DIR$/DefinitiveGuideToGrails2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/DefinitiveGuideToGrails2-grailsPlugins.iml" filepath="$PROJECT_DIR$/DefinitiveGuideToGrails2-grailsPlugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gTunes.iml" filepath="$PROJECT_DIR$/gTunes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gTunes-grailsPlugins.iml" filepath="$PROJECT_DIR$/gTunes-grailsPlugins.iml" />
     </modules>
   </component>
 </project>
